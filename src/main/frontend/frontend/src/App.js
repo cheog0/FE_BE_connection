@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';  // useNavigate 임포트
+import { useNavigate } from 'react-router-dom';
 
 function App() {
     const [userid, setUserid] = useState('');
@@ -12,20 +12,23 @@ function App() {
     const handleSubmit = () => {
         const data = { userid, password };
 
+        // 로그인 API 호출
         axios.post('http://localhost:8080/api/login', data)
             .then(response => {
+                // 로그인 성공 시 처리
                 setResponseMessage("로그인에 성공했습니다.");
                 setErrorMessage('');
                 navigate('/home');  // 로그인 성공 시 /home으로 리디렉션
             })
             .catch(error => {
+                // 에러 발생 시 처리
                 if (error.response && error.response.data) {
-                    setErrorMessage(error.response.data);
+                    setErrorMessage(error.response.data);  // 서버에서 반환된 오류 메시지
                 } else {
-                    setErrorMessage('알 수 없는 오류가 발생했습니다.');
+                    setErrorMessage('알 수 없는 오류가 발생했습니다.');  // 서버와의 연결 오류 등
                 }
-                setResponseMessage('');
-                console.log(error);
+                setResponseMessage('');  // 성공 메시지 초기화
+                console.log(error);  // 에러를 콘솔에 출력
             });
     };
 

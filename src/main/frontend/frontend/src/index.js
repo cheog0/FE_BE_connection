@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import AppRouter from '../src/routers/AppRouter';  // 라우터 설정을 가져옴
+import ReactDOM from 'react-dom/client';  // 여기 변경!
+import AppRouter from './routers/AppRouter';
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
     <React.StrictMode>
-        <AppRouter />  {/* AppRouter로 라우팅을 시작 */}
-    </React.StrictMode>,
-    document.getElementById('root')
+        <AppRouter />
+    </React.StrictMode>
 );
